@@ -134,7 +134,7 @@ class _HomeState extends State<Home> {
               focusColor: Colors.green,
               splashColor: Colors.green,
               child: AnimatedContainer(
-                child: Cegitnter(child: Text("culcat")),
+                child: Center(child: Text("culcat")),
                 width: _w,
                 duration: Duration(milliseconds: 500),
                 color: _color,
