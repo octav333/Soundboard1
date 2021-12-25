@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);
@@ -11,55 +12,34 @@ class Favorites extends StatefulWidget {
 List<double> _h = [200, 150];
 List<double> _w = [200, 150];
 List<Color> _c = [Colors.red, Colors.green];
+MaterialColor _color = Colors.red;
+double _wi = 100;
 
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-            itemCount: 2,
-            itemBuilder: (BuildContext context, index) {
-              return AnimatedContainer(
-                color: _c[index],
-                width: _w[index],
-                height: _h[index],
-                duration: Duration(milliseconds: 300),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _h[index] = 100;
-                              _w[index] = 100;
-                              _c[index] = Colors.blue;
-                            });
-                          },
-                          child: Text('da')),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _h[index] = 150;
-                              _w[index] = 150;
-                              _c[index] = Colors.red;
-                            });
-                          },
-                          child: Text('nu')),
-                    ],
-                  ),
-                ),
-              );
-            }
-            //   Container(
-            //  color: Colors.red,
-            // child: Center(
-            // child: ElevatedButton(
-            //  onPressed: () {},
-            //  child: Text('buton'),
-            //   ),
-            // ),
-            //  ),
-            ));
+        body: StaggeredGridView.countBuilder(
+      crossAxisCount: 4,
+      itemCount: 8,
+      itemBuilder: (BuildContext context, int index) => InkWell(
+        onTap: () {
+          setState(() {
+            _wi = 30;
+            _color = Colors.blue;
+          });
+        },
+        child: AnimatedContainer(
+          width: _wi,
+          duration: Duration(milliseconds: 300),
+          child: Text('caca'),
+          color: _color,
+        ),
+      ),
+      staggeredTileBuilder: (int index) =>
+          StaggeredTile.count(2, index.isEven ? 2 : 1),
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
+    ));
   }
 }
