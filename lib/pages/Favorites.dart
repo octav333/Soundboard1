@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -14,6 +16,10 @@ List<double> _w = [200, 150];
 List<Color> _c = [Colors.red, Colors.green];
 MaterialColor _color = Colors.red;
 double _wi = 100;
+Timer _timer = Timer(Duration(milliseconds: 200), callback());
+callback() {
+  print('culcat');
+}
 
 class _FavoritesState extends State<Favorites> {
   @override

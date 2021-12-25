@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,10 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
+Color _red = Colors.red;
+Color _blue = Colors.blue;
+Color _green = Colors.green;
+Color _auxcolor = Colors.red;
 List cuvinte = [
   "culcat",
   "culcat",
@@ -67,16 +73,23 @@ class _HomeState extends State<Home> {
                   duration: const Duration(milliseconds: 300),
                 ),
                 onTap: () {
-                  counter++;
-                  if (counter % 2 == 0) {
+                  setState(() {
+                    _c[index] = Colors.cyanAccent;
+                  });
+                  Timer.periodic(Duration(seconds: 2), (timer) {
                     setState(() {
-                      _c[index] = Colors.purpleAccent;
+                      if (index == 0 || index == 1 || index == 2) {
+                        _c[index] = _red;
+                      }
+                      ;
+                      if (index == 3 || index == 4 || index == 5) {
+                        _c[index] = _blue;
+                      }
+                      if (index == 6 || index == 7 || index == 8) {
+                        _c[index] = _green;
+                      }
                     });
-                  } else {
-                    setState(() {
-                      _c[index] = Colors.tealAccent;
-                    });
-                  }
+                  });
                   player.play('audio/culcat.mp3');
                 },
               );
